@@ -32,7 +32,10 @@ jar:
 test:	
 	@$(ECHO_E) "$(YELLOW) Running Filesystem Classpath Test...$(NOCOLOR)"
 	java -classpath build/classes test.TestClassEnumeration
+	java -classpath build/classes test.TestClassEnumerationFindAll
 	@$(ECHO_E) "$(YELLOW) Running JAR Classpath Test...$(NOCOLOR)"
 	java -classpath build/ClassEnumerator_test.jar  test.TestClassEnumeration
 	@$(ECHO_E) "$(YELLOW) Pass. $(NOCOLOR)"
-
+	@$(ECHO_E) "$(YELLOW) Running JAR Classpath second Test...$(NOCOLOR)"
+	java -classpath build/ClassEnumerator_test.jar  test.TestClassEnumerationFindAll
+	@$(ECHO_E) "$(YELLOW) Pass. $(NOCOLOR)"

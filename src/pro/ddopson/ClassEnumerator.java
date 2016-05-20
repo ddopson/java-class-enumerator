@@ -72,8 +72,11 @@ public class ClassEnumerator {
 		
 		//Turn package name to relative path to jar file
 		String relPath = pkgname.replace('.', '/');
+		log("relative path: "+relPath);
 		String resPath = resource.getPath();
+		log("resource path: "+resPath);
 		String jarPath = resPath.replaceFirst("[.]jar[!].*", ".jar").replaceFirst("file:", "");
+		// jarPath = jarPath.replace(" ", "\\ ");
 		log("Reading JAR file: '" + jarPath + "'");
 		JarFile jarFile;
 		
