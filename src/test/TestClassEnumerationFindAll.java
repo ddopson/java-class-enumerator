@@ -1,13 +1,22 @@
 package test;
 
-import pro.ddopson.ClassEnumerator;
+import java.io.File;
 import java.util.List;
 
-public class TestClassEnumeration {
+import pro.ddopson.ClassEnumeratorFindAll;
+
+public class TestClassEnumerationFindAll {
 	public static void main(String[] args) {
-		System.out.println("Test class package name: "+TestClassEnumeration.class.getPackage());
-		List<Class<?>> classes = ClassEnumerator.getClassesForPackage(TestClassEnumeration.class.getPackage());
+		try{
+		
+		File directory = new File("/Users/bhaveshkumar/mygit/java-class-enumerator/folder");
+		System.out.println("Test class location: " );
+		List<Class<?>> classes = ClassEnumeratorFindAll.processDirectory(directory);
+		System.out.println("Number of classes found in directory file: "+classes.size());
+
 		Class<?>[] expected = new Class<?>[] {
+			pro.ddopson.ClassEnumerator.class,
+			pro.ddopson.ClassEnumeratorFindAll.class,
 			test.ClassIShouldFindOne.class,
 			test.ClassIShouldFindTwo.class,
 			test.subpkg.ClassIShouldFindThree.class,
@@ -23,6 +32,9 @@ public class TestClassEnumeration {
 		if(classes.size() != expected.length) {
 			System.out.println("FAIL: expected to find " + expected.length + " classes, but actually found " + classes.size());
 			System.exit(-1);
+		}
+		}catch(Exception ex){
+		System.out.println("Exception occured"+ex);
 		}
 	}
 }
