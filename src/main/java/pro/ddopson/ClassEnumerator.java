@@ -10,6 +10,8 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 public class ClassEnumerator {
+	
+	private static final String CLASS_SUFFIX = ".class";
 	private static void log(String msg) {
 		System.out.println("ClassDiscovery: " + msg);	
 	}
@@ -42,7 +44,7 @@ public class ClassEnumerator {
 			String className = null;
 			
 			// we are only interested in .class files
-			if (fileName.endsWith(".class")) {
+			if (fileName.endsWith(CLASS_SUFFIX)) {
 				// removes the .class extension
 				className = pkgname + '.' + fileName.substring(0, fileName.length() - 6);
 			}
@@ -97,9 +99,9 @@ public class ClassEnumerator {
 			String className = null;
 			
 			//If content is a class save class name.
-			if(entryName.endsWith(".class") && entryName.startsWith(relPath) 
+			if(entryName.endsWith(CLASS_SUFFIX) && entryName.startsWith(relPath) 
 					&& entryName.length() > (relPath.length() + "/".length())) {
-				className = entryName.replace('/', '.').replace('\\', '.').replace(".class", "");
+				className = entryName.replace('/', '.').replace('\\', '.').replace(CLASS_SUFFIX, "");
 			}
 			
 			log("JarEntry '" + entryName + "'  =>  class '" + className + "'");
