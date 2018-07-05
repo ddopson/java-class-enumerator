@@ -1,6 +1,7 @@
 package test;
 
 import pro.ddopson.ClassEnumerator;
+import test.subpkg.ClassIShouldFindThree;
 
 import static org.junit.Assert.fail;
 
@@ -14,9 +15,9 @@ public class TestClassEnumeration {
 		System.out.println("Test class package name: "+TestClassEnumeration.class.getPackage());
 		List<Class<?>> classes = ClassEnumerator.getClassesForPackage(TestClassEnumeration.class.getPackage());
 		Class<?>[] expected = new Class<?>[] {
-			test.ClassIShouldFindOne.class,
-			test.ClassIShouldFindTwo.class,
-			test.subpkg.ClassIShouldFindThree.class,
+			ClassIShouldFindOne.class,
+			ClassIShouldFindTwo.class,
+			ClassIShouldFindThree.class,
 			TestClassEnumeration.class,
 			TestClassEnumerationFindAll.class
 		};
