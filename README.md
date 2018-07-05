@@ -14,35 +14,35 @@ When you run 'make' for this project, the following should print out:
  Cleaning...
 rm -rf build/
  Building...
-javac -d build/classes src/pro/ddopson/ClassEnumerator.java src/ppdd/ClassIShouldFindOne.java src/ppdd/ClassIShouldFindTwo.java src/ppdd/subpkg/ClassIShouldFindThree.java src/ppdd/TestClassEnumeration.java
+javac -d build/classes src/pro/ddopson/ClassEnumerator.java src/test/ClassIShouldFindOne.java src/test/ClassIShouldFindTwo.java src/test/subpkg/ClassIShouldFindThree.java src/test/TestClassEnumeration.java
  Making JAR Files...
 jar cf build/ClassEnumerator_test.jar -C build/classes/ . 
 jar cf build/ClassEnumerator.jar -C build/classes/ pro
  Running Filesystem Classpath Test...
-java -classpath build/classes ppdd.TestClassEnumeration
-ClassDiscovery: Package: 'ppdd' becomes Resource: 'file:/Users/Dopson/work/other/java-class-enumeration/build/classes/ppdd'
-ClassDiscovery: Reading Directory '/Users/Dopson/work/other/java-class-enumeration/build/classes/ppdd'
-ClassDiscovery: FileName 'ClassIShouldFindOne.class'  =>  class 'ppdd.ClassIShouldFindOne'
-ClassDiscovery: FileName 'ClassIShouldFindTwo.class'  =>  class 'ppdd.ClassIShouldFindTwo'
+java -classpath build/classes test.TestClassEnumeration
+ClassDiscovery: Package: 'test' becomes Resource: 'file:/Users/Dopson/work/other/java-class-enumeration/build/classes/test'
+ClassDiscovery: Reading Directory '/Users/Dopson/work/other/java-class-enumeration/build/classes/test'
+ClassDiscovery: FileName 'ClassIShouldFindOne.class'  =>  class 'test.ClassIShouldFindOne'
+ClassDiscovery: FileName 'ClassIShouldFindTwo.class'  =>  class 'test.ClassIShouldFindTwo'
 ClassDiscovery: FileName 'subpkg'  =>  class 'null'
-ClassDiscovery: Reading Directory '/Users/Dopson/work/other/java-class-enumeration/build/classes/ppdd/subpkg'
-ClassDiscovery: FileName 'ClassIShouldFindThree.class'  =>  class 'ppdd.subpkg.ClassIShouldFindThree'
-ClassDiscovery: FileName 'TestClassEnumeration.class'  =>  class 'ppdd.TestClassEnumeration'
+ClassDiscovery: Reading Directory '/Users/Dopson/work/other/java-class-enumeration/build/classes/test/subpkg'
+ClassDiscovery: FileName 'ClassIShouldFindThree.class'  =>  class 'test.subpkg.ClassIShouldFindThree'
+ClassDiscovery: FileName 'TestClassEnumeration.class'  =>  class 'test.TestClassEnumeration'
  Running JAR Classpath Test...
-java -classpath build/ClassEnumerator_test.jar  ppdd.TestClassEnumeration
-ClassDiscovery: Package: 'ppdd' becomes Resource: 'jar:file:/Users/Dopson/work/other/java-class-enumeration/build/ClassEnumerator_test.jar!/ppdd'
+java -classpath build/ClassEnumerator_test.jar  test.TestClassEnumeration
+ClassDiscovery: Package: 'test' becomes Resource: 'jar:file:/Users/Dopson/work/other/java-class-enumeration/build/ClassEnumerator_test.jar!/test'
 ClassDiscovery: Reading JAR file: '/Users/Dopson/work/other/java-class-enumeration/build/ClassEnumerator_test.jar'
 ClassDiscovery: JarEntry 'META-INF/'  =>  class 'null'
 ClassDiscovery: JarEntry 'META-INF/MANIFEST.MF'  =>  class 'null'
 ClassDiscovery: JarEntry 'pro/'  =>  class 'null'
 ClassDiscovery: JarEntry 'pro/ddopson/'  =>  class 'null'
 ClassDiscovery: JarEntry 'pro/ddopson/ClassEnumerator.class'  =>  class 'null'
-ClassDiscovery: JarEntry 'ppdd/'  =>  class 'null'
-ClassDiscovery: JarEntry 'ppdd/ClassIShouldFindOne.class'  =>  class 'ppdd.ClassIShouldFindOne'
-ClassDiscovery: JarEntry 'ppdd/ClassIShouldFindTwo.class'  =>  class 'ppdd.ClassIShouldFindTwo'
-ClassDiscovery: JarEntry 'ppdd/subpkg/'  =>  class 'null'
-ClassDiscovery: JarEntry 'ppdd/subpkg/ClassIShouldFindThree.class'  =>  class 'ppdd.subpkg.ClassIShouldFindThree'
-ClassDiscovery: JarEntry 'ppdd/TestClassEnumeration.class'  =>  class 'ppdd.TestClassEnumeration'
+ClassDiscovery: JarEntry 'test/'  =>  class 'null'
+ClassDiscovery: JarEntry 'test/ClassIShouldFindOne.class'  =>  class 'test.ClassIShouldFindOne'
+ClassDiscovery: JarEntry 'test/ClassIShouldFindTwo.class'  =>  class 'test.ClassIShouldFindTwo'
+ClassDiscovery: JarEntry 'test/subpkg/'  =>  class 'null'
+ClassDiscovery: JarEntry 'test/subpkg/ClassIShouldFindThree.class'  =>  class 'test.subpkg.ClassIShouldFindThree'
+ClassDiscovery: JarEntry 'test/TestClassEnumeration.class'  =>  class 'test.TestClassEnumeration'
  Tests Passed. 
 </pre>
 
