@@ -136,4 +136,26 @@ public class ClassEnumerator {
 	private ClassEnumerator() {
 		
 	}
+	
+
+	public static class ClassEnumException extends RuntimeException {
+
+		private static final long serialVersionUID = 909384213793458361L;
+
+		public ClassEnumException() {
+			super();
+		}
+
+		public ClassEnumException(String message) {
+			super(message);
+		}
+
+		public ClassEnumException(String message, Throwable cause) {
+			super(message, cause);
+		}
+
+		public ClassEnumException(Throwable cause) {
+			super(cause);
+		}
+	}
 }
