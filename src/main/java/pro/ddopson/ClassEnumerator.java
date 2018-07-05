@@ -57,41 +57,37 @@ public class ClassEnumerator {
 	 */
 	public static List<Class<?>> processJarfile(URL resource, String pkgname) {
 		List<Class<?>> classes = new ArrayList<>();
-		
-		//Turn package name to relative path to jar file
+		// Turn package name to relative path to jar file
 		String relPath = pkgname.replace('.', '/');
 		String resPath = resource.getPath();
 		String jarPath = resPath.replaceFirst("[.]jar[!].*", ".jar").replaceFirst("file:", "");
-		// jarPath = jarPath.replace(" ", "\\ ");
-		JarFile jarFile;
-		
-		try {
-			jarFile = new JarFile(jarPath);         
-		} 
-		catch (IOException e) {
-			String err = "Unexpected IOException reading JAR File '" + jarPath + "'";
-			throw new ClassEnumException(err, e);
-		}
-		
-		//get contents of jar file and iterate through them
-		Enumeration<JarEntry> entries = jarFile.entries();
-		while(entries.hasMoreElements()) {
-			JarEntry entry = entries.nextElement();
-			
-			//Get content name from jar file
-			String entryName = entry.getName();
-			String className = null;
-			
-			//If content is a class save class name.
-			if(entryName.endsWith(CLASS_SUFFIX) && entryName.startsWith(relPath) 
-					&& entryName.length() > (relPath.length() + "/".length())) {
-				className = entryName.replace('/', '.').replace('\\', '.').replace(CLASS_SUFFIX, "");
+
+		try (JarFile jarFile = new JarFile(jarPath)) {
+			// attempt to load jar file
+
+			// get contents of jar file and iterate through them
+			Enumeration<JarEntry> entries = jarFile.entries();
+			while (entries.hasMoreElements()) {
+				JarEntry entry = entries.nextElement();
+
+				// Get content name from jar file
+				String entryName = entry.getName();
+				String className = null;
+
+				// If content is a class save class name.
+				if (entryName.endsWith(CLASS_SUFFIX) && entryName.startsWith(relPath)
+						&& entryName.length() > (relPath.length() + "/".length())) {
+					className = entryName.replace('/', '.').replace('\\', '.').replace(CLASS_SUFFIX, "");
+				}
+
+				// If content is a class add class to List
+				if (className != null) {
+					classes.add(loadClass(className));
+				}
 			}
-			
-			//If content is a class add class to List
-			if (className != null) {
-				classes.add(loadClass(className));
-			}
+		} catch (IOException e) {
+			String err = "Unexpected IOException reading JAR File [%s]";
+			throw new ClassEnumException(String.format(err, jarPath), e);
 		}
 		return classes;
 	}
