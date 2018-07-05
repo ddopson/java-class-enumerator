@@ -12,16 +12,14 @@ import java.util.jar.JarFile;
 public class ClassEnumerator {
 	
 	private static final String CLASS_SUFFIX = ".class";
-	private static void log(String msg) {
-		System.out.println("ClassDiscovery: " + msg);	
-	}
 
 	private static Class<?> loadClass(String className) {
 		try {
 			return Class.forName(className);
 		} 
 		catch (ClassNotFoundException e) {
-			throw new RuntimeException("Unexpected ClassNotFoundException loading class '" + className + "'");
+			String err = "Unexpected ClassNotFoundException loading class '" + className + "'";
+			throw new ClassEnumException(err);
 		}
 	}
 	
@@ -62,19 +60,17 @@ public class ClassEnumerator {
 		
 		//Turn package name to relative path to jar file
 		String relPath = pkgname.replace('.', '/');
-		log("relative path: "+relPath);
 		String resPath = resource.getPath();
-		log("resource path: "+resPath);
 		String jarPath = resPath.replaceFirst("[.]jar[!].*", ".jar").replaceFirst("file:", "");
 		// jarPath = jarPath.replace(" ", "\\ ");
-		log("Reading JAR file: '" + jarPath + "'");
 		JarFile jarFile;
 		
 		try {
 			jarFile = new JarFile(jarPath);         
 		} 
 		catch (IOException e) {
-			throw new RuntimeException("Unexpected IOException reading JAR File '" + jarPath + "'", e);
+			String err = "Unexpected IOException reading JAR File '" + jarPath + "'";
+			throw new ClassEnumException(err, e);
 		}
 		
 		//get contents of jar file and iterate through them
@@ -91,8 +87,6 @@ public class ClassEnumerator {
 					&& entryName.length() > (relPath.length() + "/".length())) {
 				className = entryName.replace('/', '.').replace('\\', '.').replace(CLASS_SUFFIX, "");
 			}
-			
-			log("JarEntry '" + entryName + "'  =>  class '" + className + "'");
 			
 			//If content is a class add class to List
 			if (className != null) {
@@ -117,11 +111,10 @@ public class ClassEnumerator {
 		
 		//If we can't find the resource we throw an exception
 		if (resource == null) {
-			throw new RuntimeException("Unexpected problem: No resource for " + relPath);
+			String err = "Unexpected problem: No resource for " + relPath;
+			throw new ClassEnumException(err);
 		}
 		
-		log("Package: '" + pkgname + "' becomes Resource: '" + resource.toString() + "'");
-
 		//If the resource is a jar get all classes from jar
 		if(resource.toString().startsWith("jar:")) {
 			classes.addAll(processJarfile(resource, pkgname));
