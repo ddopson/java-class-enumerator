@@ -26,39 +26,27 @@ public class ClassEnumerator {
 	}
 	
 	/**
-	 * Given a package name and a directory returns all classes within that directory
-	 * @param directory
+	 * Given a package name and a directory returns all classes within that
+	 * directory
+	 * 
+	 * @param dir
 	 * @param pkgname
 	 * @return Classes within Directory with package name
 	 */
-	public static List<Class<?>> processDirectory(File directory, String pkgname) {
-		
-		ArrayList<Class<?>> classes = new ArrayList<>();
-		 
-		log("Reading Directory '" + directory + "'");
-		
-		// Get the list of the files contained in the package
-		String[] files = directory.list();
-		for (int i = 0; i < files.length; i++) {
-			String fileName = files[i];
-			String className = null;
-			
+	public static List<Class<?>> processDirectory(File dir, String pkgname) {
+		List<Class<?>> classes = new ArrayList<>();
+		for(String file : dir.list()) {
+			String cls = null;
 			// we are only interested in .class files
-			if (fileName.endsWith(CLASS_SUFFIX)) {
+			if (file.endsWith(CLASS_SUFFIX)) {
 				// removes the .class extension
-				className = pkgname + '.' + fileName.substring(0, fileName.length() - 6);
+				cls = pkgname + '.' + file.substring(0, file.length() - 6);
+				classes.add(loadClass(cls));
 			}
-			
-			log("FileName '" + fileName + "'  =>  class '" + className + "'");
-			
-			if (className != null) {
-				classes.add(loadClass(className));
-			}
-			
-			//If the file is a directory recursively class this method.
-			File subdir = new File(directory, fileName);
+			// If the file is a directory recursively class this method.
+			File subdir = new File(dir, file);
 			if (subdir.isDirectory()) {
-				classes.addAll(processDirectory(subdir, pkgname + '.' + fileName));
+				classes.addAll(processDirectory(subdir, pkgname + '.' + file));
 			}
 		}
 		return classes;
