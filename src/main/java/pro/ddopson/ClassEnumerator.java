@@ -98,31 +98,48 @@ public class ClassEnumerator {
 	 * @param pkg
 	 */
 	public static List<Class<?>> getPackageClasses(Package pkg) {
-		ArrayList<Class<?>> classes = new ArrayList<>();
-		
-		//Get name of package and turn it to a relative path
-		String pkgname = pkg.getName();
-		String relPath = pkgname.replace('.', '/');
+		return getPackageClasses(pkg, ClassLoader.getSystemClassLoader());
+	}
 	
-		// Get a File object for the package
-		URL resource = ClassLoader.getSystemClassLoader().getResource(relPath);
-		
-		//If we can't find the resource we throw an exception
-		if (resource == null) {
-			String err = "Unexpected problem: No resource for " + relPath;
-			throw new ClassEnumException(err);
-		}
-		
-		//If the resource is a jar get all classes from jar
-		if(resource.toString().startsWith("jar:")) {
-			classes.addAll(processJarfile(resource, pkgname));
-		} 
-		else {
-			File file = new File(resource.getPath());
-			classes.addAll(processDirectory(file, pkgname));
-		}
+	/**
+	 * Given a package name and class loader this method returns all classes
+	 * contained in package.
+	 * 
+	 * @param p
+	 * @param l
+	 * @return
+	 * @throws IOException
+	 */
+	public static List<Class<?>> getPackageClasses(Package p, ClassLoader l) {
+		List<Class<?>> classes = new ArrayList<>();
 
-		return classes;
+		// Get name of package and turn it to a relative path
+		String pkgname = p.getName();
+		String relPath = pkgname.replace('.', '/');
+
+		// Get a File object for the package
+		try {
+			Enumeration<URL> resources = l.getResources(relPath);
+			if (!resources.hasMoreElements()) {
+				String err = "Unexpected problem: No resource for {%s}";
+				throw new ClassEnumException(String.format(err, relPath));
+			} else {
+				do {
+					URL resource = resources.nextElement();
+					// If the resource is a jar get all classes from jar
+					if (resource.toString().startsWith("jar:")) {
+						classes.addAll(processJarfile(resource, pkgname));
+					} else {
+						File dir = new File(resource.getPath());
+						classes.addAll(processDirectory(dir, pkgname));
+					}
+				} while (resources.hasMoreElements());
+			}
+			return classes;
+		} catch (IOException e) {
+			String err = "Unexpected error loading resources";
+			throw new ClassEnumException(err, e);
+		}
 	}
 	
 	private ClassEnumerator() {
