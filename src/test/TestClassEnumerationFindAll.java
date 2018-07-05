@@ -1,14 +1,20 @@
 package test;
 
+import static org.junit.Assert.fail;
+
 import java.io.File;
 import java.util.List;
+
+import org.junit.Test;
 
 import pro.ddopson.ClassEnumeratorFindAll;
 import test.subpkg.ClassIShouldFindThree;
 
 
 public class TestClassEnumerationFindAll {
-	public static void main(String[] args) {
+	
+	@Test
+	public void main() {
 		try{
 		
 		File directory = new File("folder");
@@ -27,16 +33,14 @@ public class TestClassEnumerationFindAll {
 		};
 		for (Class<?> clazz : expected) {
 			if (!classes.contains(clazz)) {
-				System.out.println("FAIL: expected to find class '" + clazz.getName() + "'");
-				System.exit(-1);
+				fail("FAIL: expected to find class '" + clazz.getName() + "'");
 			}
 		}
 		if(classes.size() != expected.length) {
-			System.out.println("FAIL: expected to find " + expected.length + " classes, but actually found " + classes.size());
-			System.exit(-1);
+			fail("FAIL: expected to find " + expected.length + " classes, but actually found " + classes.size());
 		}
 		}catch(Exception ex){
-		System.out.println("Exception occured"+ex);
+			fail("Exception occured"+ex);
 		}
 	}
 }

@@ -1,10 +1,16 @@
 package test;
 
 import pro.ddopson.ClassEnumerator;
+
+import static org.junit.Assert.fail;
+
 import java.util.List;
 
+import org.junit.Test;
+
 public class TestClassEnumeration {
-	public static void main(String[] args) {
+	@Test
+	public void main() {
 		System.out.println("Test class package name: "+TestClassEnumeration.class.getPackage());
 		List<Class<?>> classes = ClassEnumerator.getClassesForPackage(TestClassEnumeration.class.getPackage());
 		Class<?>[] expected = new Class<?>[] {
@@ -16,13 +22,11 @@ public class TestClassEnumeration {
 		};
 		for (Class<?> clazz : expected) {
 			if (!classes.contains(clazz)) {
-				System.out.println("FAIL: expected to find class '" + clazz.getName() + "'");
-				System.exit(-1);
+				fail("FAIL: expected to find class '" + clazz.getName() + "'");
 			}
 		}
 		if(classes.size() != expected.length) {
-			System.out.println("FAIL: expected to find " + expected.length + " classes, but actually found " + classes.size());
-			System.exit(-1);
+			fail("FAIL: expected to find " + expected.length + " classes, but actually found " + classes.size());
 		}
 	}
 }
