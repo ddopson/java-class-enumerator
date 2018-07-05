@@ -13,13 +13,13 @@ public class ClassEnumerator {
 	
 	private static final String CLASS_SUFFIX = ".class";
 
-	private static Class<?> loadClass(String className) {
+	private static Class<?> loadClass(String cls) {
 		try {
-			return Class.forName(className);
+			return Class.forName(cls);
 		} 
 		catch (ClassNotFoundException e) {
-			String err = "Unexpected ClassNotFoundException loading class '" + className + "'";
-			throw new ClassEnumException(err);
+			String err = "Unexpected ClassNotFoundException loading class [%s]";
+			throw new ClassEnumException(String.format(err, cls), e);
 		}
 	}
 	
