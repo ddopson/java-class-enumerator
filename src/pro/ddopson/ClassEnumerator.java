@@ -142,4 +142,8 @@ public class ClassEnumerator {
 
 		return classes;
 	}
+	
+	private ClassEnumerator() {
+		
+	}
 }
