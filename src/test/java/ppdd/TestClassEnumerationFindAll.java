@@ -16,7 +16,7 @@ public class TestClassEnumerationFindAll {
 	public void main() {
 		try{
 		
-		File directory = new File("folder");
+		File directory = new File("src/test/resources/folder");
 		System.out.println("Test class location: " );
 		List<Class<?>> classes = ClassEnumeratorFindAll.processDirectory(directory);
 		System.out.println("Number of classes found in directory file: "+classes.size());
