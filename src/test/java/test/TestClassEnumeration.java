@@ -1,5 +1,7 @@
 package test;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.List;
@@ -29,4 +31,16 @@ public class TestClassEnumeration {
 			fail("FAIL: expected to find " + expected.length + " classes, but actually found " + classes.size());
 		}
 	}
+	
+	@Test
+	public void getClassForPackageSuccessTest() {
+		ClassLoader loader = ClassEnumerator.class.getClassLoader();
+		Package pkg = ClassEnumerator.class.getPackage();
+		assertNotNull(loader);
+		assertNotNull(pkg);
+		
+		List<Class<?>> classes = ClassEnumerator.getClassesForPackage(pkg);
+		assertTrue(classes.contains(ClassEnumerator.class));
+	}
+	
 }
