@@ -33,7 +33,7 @@ public class ClassEnumerator {
 	 */
 	public static List<Class<?>> processDirectory(File directory, String pkgname) {
 		
-		ArrayList<Class<?>> classes = new ArrayList<Class<?>>();
+		ArrayList<Class<?>> classes = new ArrayList<>();
 		 
 		log("Reading Directory '" + directory + "'");
 		
@@ -70,7 +70,7 @@ public class ClassEnumerator {
 	 * @param pkgname
 	 */
 	public static List<Class<?>> processJarfile(URL resource, String pkgname) {
-		List<Class<?>> classes = new ArrayList<Class<?>>();
+		List<Class<?>> classes = new ArrayList<>();
 		
 		//Turn package name to relative path to jar file
 		String relPath = pkgname.replace('.', '/');
@@ -118,7 +118,7 @@ public class ClassEnumerator {
 	 * @param pkg
 	 */
 	public static List<Class<?>> getClassesForPackage(Package pkg) {
-		ArrayList<Class<?>> classes = new ArrayList<Class<?>>();
+		ArrayList<Class<?>> classes = new ArrayList<>();
 		
 		//Get name of package and turn it to a relative path
 		String pkgname = pkg.getName();
