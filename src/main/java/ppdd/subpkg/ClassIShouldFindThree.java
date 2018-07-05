@@ -1,4 +1,4 @@
-package test.subpkg;
+package ppdd.subpkg;
 
 public class ClassIShouldFindThree {
 	public static void foo() {

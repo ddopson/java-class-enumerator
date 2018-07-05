@@ -1,4 +1,4 @@
-package test;
+package ppdd;
 import static org.junit.Assert.fail;
 
 import java.io.File;
@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.junit.Test;
 
+import ppdd.subpkg.ClassIShouldFindThree;
 import pro.ddopson.ClassEnumeratorFindAll;
-import test.subpkg.ClassIShouldFindThree;
 
 
 public class TestClassEnumerationFindAll {
@@ -24,10 +24,10 @@ public class TestClassEnumerationFindAll {
 		Class<?>[] expected = new Class<?>[] {
 			pro.ddopson.ClassEnumerator.class,
 			ClassEnumeratorFindAll.class,
-			test.ClassIShouldFindOne.class,
-			test.ClassIShouldFindTwo.class,
+			ppdd.ClassIShouldFindOne.class,
+			ppdd.ClassIShouldFindTwo.class,
 			ClassIShouldFindThree.class,
-			test.TestClassEnumeration.class,
+			ppdd.TestClassEnumeration.class,
 			TestClassEnumerationFindAll.class
 		};
 		for (Class<?> clazz : expected) {

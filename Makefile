@@ -9,7 +9,7 @@ NOCOLOR = \033[39;0m
 java_src_files = $(shell find src -name '*.java')
 
 .PHONY: default
-default: clean build jar test
+default: clean build jar ppdd
 
 .PHONY: clean
 clean:
@@ -28,14 +28,14 @@ jar:
 	jar cf build/ClassEnumerator_test.jar -C build/classes/ . 
 	jar cf build/ClassEnumerator.jar -C build/classes/ pro
 
-.PHONY: test
-test:	
+.PHONY: ppdd
+ppdd:	
 	@$(ECHO_E) "$(YELLOW) Running Filesystem Classpath Test...$(NOCOLOR)"
-	java -classpath build/classes test.TestClassEnumeration
-	java -classpath build/classes test.TestClassEnumerationFindAll
+	java -classpath build/classes ppdd.TestClassEnumeration
+	java -classpath build/classes ppdd.TestClassEnumerationFindAll
 	@$(ECHO_E) "$(YELLOW) Running JAR Classpath Test...$(NOCOLOR)"
-	java -classpath build/ClassEnumerator_test.jar  test.TestClassEnumeration
+	java -classpath build/ClassEnumerator_test.jar  ppdd.TestClassEnumeration
 	@$(ECHO_E) "$(YELLOW) Pass. $(NOCOLOR)"
 	@$(ECHO_E) "$(YELLOW) Running JAR Classpath second Test...$(NOCOLOR)"
-	java -classpath build/ClassEnumerator_test.jar  test.TestClassEnumerationFindAll
+	java -classpath build/ClassEnumerator_test.jar  ppdd.TestClassEnumerationFindAll
 	@$(ECHO_E) "$(YELLOW) Pass. $(NOCOLOR)"

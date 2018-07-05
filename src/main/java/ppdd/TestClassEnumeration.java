@@ -1,4 +1,4 @@
-package test;
+package ppdd;
 
 import static org.junit.Assert.fail;
 
@@ -14,11 +14,11 @@ public class TestClassEnumeration {
 		System.out.println("Test class package name: "+TestClassEnumeration.class.getPackage());
 		List<Class<?>> classes = ClassEnumerator.getClassesForPackage(TestClassEnumeration.class.getPackage());
 		Class<?>[] expected = new Class<?>[] {
-			test.ClassIShouldFindOne.class,
-			test.ClassIShouldFindTwo.class,
-			test.subpkg.ClassIShouldFindThree.class,
+			ppdd.ClassIShouldFindOne.class,
+			ppdd.ClassIShouldFindTwo.class,
+			ppdd.subpkg.ClassIShouldFindThree.class,
 			TestClassEnumeration.class,
-			test.TestClassEnumerationFindAll.class
+			ppdd.TestClassEnumerationFindAll.class
 		};
 		for (Class<?> clazz : expected) {
 			if (!classes.contains(clazz)) {
