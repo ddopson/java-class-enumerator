@@ -1,5 +1,4 @@
 package test;
-
 import static org.junit.Assert.fail;
 
 import java.io.File;
@@ -8,6 +7,7 @@ import java.util.List;
 import org.junit.Test;
 
 import pro.ddopson.ClassEnumeratorFindAll;
+import test.TestClassEnumeration;
 import test.subpkg.ClassIShouldFindThree;
 
 
@@ -25,7 +25,7 @@ public class TestClassEnumerationFindAll {
 		Class<?>[] expected = new Class<?>[] {
 			pro.ddopson.ClassEnumerator.class,
 			ClassEnumeratorFindAll.class,
-			ClassIShouldFindOne.class,
+			test.ClassIShouldFindOne.class,
 			test.ClassIShouldFindTwo.class,
 			ClassIShouldFindThree.class,
 			TestClassEnumeration.class,
