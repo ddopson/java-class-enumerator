@@ -1,13 +1,12 @@
 package test;
 
-import pro.ddopson.ClassEnumerator;
-import test.subpkg.ClassIShouldFindThree;
-
 import static org.junit.Assert.fail;
 
 import java.util.List;
 
 import org.junit.Test;
+
+import pro.ddopson.ClassEnumerator;
 
 public class TestClassEnumeration {
 	@Test
@@ -15,11 +14,11 @@ public class TestClassEnumeration {
 		System.out.println("Test class package name: "+TestClassEnumeration.class.getPackage());
 		List<Class<?>> classes = ClassEnumerator.getClassesForPackage(TestClassEnumeration.class.getPackage());
 		Class<?>[] expected = new Class<?>[] {
-			ClassIShouldFindOne.class,
-			ClassIShouldFindTwo.class,
-			ClassIShouldFindThree.class,
+			test.ClassIShouldFindOne.class,
+			test.ClassIShouldFindTwo.class,
+			test.subpkg.ClassIShouldFindThree.class,
 			TestClassEnumeration.class,
-			TestClassEnumerationFindAll.class
+			test.TestClassEnumerationFindAll.class
 		};
 		for (Class<?> clazz : expected) {
 			if (!classes.contains(clazz)) {

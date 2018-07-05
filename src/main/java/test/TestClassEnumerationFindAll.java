@@ -7,7 +7,6 @@ import java.util.List;
 import org.junit.Test;
 
 import pro.ddopson.ClassEnumeratorFindAll;
-import test.TestClassEnumeration;
 import test.subpkg.ClassIShouldFindThree;
 
 
@@ -28,7 +27,7 @@ public class TestClassEnumerationFindAll {
 			test.ClassIShouldFindOne.class,
 			test.ClassIShouldFindTwo.class,
 			ClassIShouldFindThree.class,
-			TestClassEnumeration.class,
+			test.TestClassEnumeration.class,
 			TestClassEnumerationFindAll.class
 		};
 		for (Class<?> clazz : expected) {
