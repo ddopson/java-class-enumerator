@@ -51,7 +51,9 @@ public class ClassEnumerator {
 	}
 
 	/**
-	 * Given a jar file's URL and a package name returns all classes within jar file.
+	 * Given a jar file's URL and a package name returns all classes within jar
+	 * file.
+	 * 
 	 * @param resource
 	 * @param pkgname
 	 */
@@ -116,7 +118,8 @@ public class ClassEnumerator {
 			classes.addAll(processJarfile(resource, pkgname));
 		} 
 		else {
-			classes.addAll(processDirectory(new File(resource.getPath()), pkgname));
+			File file = new File(resource.getPath());
+			classes.addAll(processDirectory(file, pkgname));
 		}
 
 		return classes;
