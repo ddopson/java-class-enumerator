@@ -20,7 +20,6 @@ public class TestClassEnumeration {
 			test.ClassIShouldFindTwo.class,
 			test.subpkg.ClassIShouldFindThree.class,
 			TestClassEnumeration.class,
-			test.TestClassEnumerationFindAll.class
 		};
 		for (Class<?> clazz : expected) {
 			if (!classes.contains(clazz)) {
