@@ -4,22 +4,24 @@ import java.io.File;
 import java.util.List;
 
 import pro.ddopson.ClassEnumeratorFindAll;
+import test.subpkg.ClassIShouldFindThree;
+
 
 public class TestClassEnumerationFindAll {
 	public static void main(String[] args) {
 		try{
 		
-		File directory = new File("/Users/bhaveshkumar/mygit/java-class-enumerator/folder");
+		File directory = new File("folder");
 		System.out.println("Test class location: " );
 		List<Class<?>> classes = ClassEnumeratorFindAll.processDirectory(directory);
 		System.out.println("Number of classes found in directory file: "+classes.size());
 
 		Class<?>[] expected = new Class<?>[] {
 			pro.ddopson.ClassEnumerator.class,
-			pro.ddopson.ClassEnumeratorFindAll.class,
-			test.ClassIShouldFindOne.class,
+			ClassEnumeratorFindAll.class,
+			ClassIShouldFindOne.class,
 			test.ClassIShouldFindTwo.class,
-			test.subpkg.ClassIShouldFindThree.class,
+			ClassIShouldFindThree.class,
 			TestClassEnumeration.class,
 			TestClassEnumerationFindAll.class
 		};
