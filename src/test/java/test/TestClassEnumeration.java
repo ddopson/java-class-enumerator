@@ -14,7 +14,7 @@ public class TestClassEnumeration {
 	@Test
 	public void main() {
 		System.out.println("Test class package name: "+TestClassEnumeration.class.getPackage());
-		List<Class<?>> classes = ClassEnumerator.getClassesForPackage(TestClassEnumeration.class.getPackage());
+		List<Class<?>> classes = ClassEnumerator.getPackageClasses(TestClassEnumeration.class.getPackage());
 		Class<?>[] expected = new Class<?>[] {
 			test.ClassIShouldFindOne.class,
 			test.ClassIShouldFindTwo.class,
@@ -38,7 +38,7 @@ public class TestClassEnumeration {
 		assertNotNull(loader);
 		assertNotNull(pkg);
 		
-		List<Class<?>> classes = ClassEnumerator.getClassesForPackage(pkg);
+		List<Class<?>> classes = ClassEnumerator.getPackageClasses(pkg);
 		assertTrue(classes.contains(ClassEnumerator.class));
 	}
 	

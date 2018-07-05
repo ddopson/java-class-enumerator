@@ -97,7 +97,7 @@ public class ClassEnumerator {
 	 * Give a package this method returns all classes contained in that package
 	 * @param pkg
 	 */
-	public static List<Class<?>> getClassesForPackage(Package pkg) {
+	public static List<Class<?>> getPackageClasses(Package pkg) {
 		ArrayList<Class<?>> classes = new ArrayList<>();
 		
 		//Get name of package and turn it to a relative path
